@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StoreManagementSystem.Data;
@@ -11,9 +12,11 @@ using StoreManagementSystem.Data;
 namespace StoreManagementSystem.Migrations
 {
     [DbContext(typeof(StoreManagementSystemContext))]
-    partial class StoreManagementSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20240704144449_AddItemDescriptionToRIMigration")]
+    partial class AddItemDescriptionToRIMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

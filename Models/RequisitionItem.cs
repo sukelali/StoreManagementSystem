@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreManagementSystem.Models
 {
@@ -7,7 +8,11 @@ namespace StoreManagementSystem.Models
 
         public long RequisitionId { get; set; }
 
+
+        [Required(ErrorMessage = "Item Field is required")]
         public long ItemId { get; set; }
+
+        public required string ItemDescription { get; set; }
 
         public float Quantity { get; set; }
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StoreManagementSystem.Data;
@@ -11,9 +12,11 @@ using StoreManagementSystem.Data;
 namespace StoreManagementSystem.Migrations
 {
     [DbContext(typeof(StoreManagementSystemContext))]
-    partial class StoreManagementSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20240704114947_AddRequisitionMigration")]
+    partial class AddRequisitionMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,10 +144,6 @@ namespace StoreManagementSystem.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("ItemDescription")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<long>("ItemId")
                         .HasColumnType("bigint");
 
@@ -199,50 +198,50 @@ namespace StoreManagementSystem.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9373),
+                            CreatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6180),
                             Name = "Piece",
                             Symbol = "PCS",
-                            UpdatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9376)
+                            UpdatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6183)
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9378),
+                            CreatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6185),
                             Name = "Yards",
                             Symbol = "YDS",
-                            UpdatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9378)
+                            UpdatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6186)
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9380),
+                            CreatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6187),
                             Name = "Centimeter",
                             Symbol = "CM",
-                            UpdatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9380)
+                            UpdatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6188)
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9381),
+                            CreatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6189),
                             Name = "Milimeter",
                             Symbol = "MM",
-                            UpdatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9382)
+                            UpdatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6189)
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9416),
+                            CreatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6191),
                             Name = "Gauss",
                             Symbol = "GS",
-                            UpdatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9416)
+                            UpdatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6191)
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9417),
+                            CreatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6192),
                             Name = "Cone",
                             Symbol = "Cone",
-                            UpdatedOn = new DateTime(2024, 7, 4, 14, 44, 46, 968, DateTimeKind.Utc).AddTicks(9418)
+                            UpdatedOn = new DateTime(2024, 7, 4, 11, 49, 46, 111, DateTimeKind.Utc).AddTicks(6193)
                         });
                 });
 

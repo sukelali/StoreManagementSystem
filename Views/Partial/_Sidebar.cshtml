@@ -24,8 +24,8 @@
                 data-accordion="false">
 
 
-                <li class="nav-item has-treeview @(ViewData["open_menu"].ToString() == "item_setup" ? "menu-open": "") ">
-                    <a href="#" class="nav-link @(ViewData["open_menu"].ToString() == "item_setup" ? "active": "")">
+                <li class="nav-item has-treeview @(ViewData["open_menu"]?.ToString() == "item_setup" ? "menu-open": "") ">
+                    <a href="#" class="nav-link @(ViewData["open_menu"]?.ToString() == "item_setup" ? "active": "")">
                             <i class="fa fa-cog"></i>
                             <p>
                                 Item Setup
@@ -35,23 +35,51 @@
                         <ul class="nav nav-treeview">
 
                             <li class="nav-item">
-                                <a asp-controller="Units" asp-action="Index" class="nav-link @(ViewData["active_option"].ToString() == "unit_list" ? "active": "")">
+                                <a asp-controller="Units" asp-action="Index" class="nav-link @(ViewData["active_option"]?.ToString() == "unit_list" ? "active": "")">
                                 <i class="fa fa-table nav-icon"></i>
                                     <p>Unit</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a asp-controller="ItemCategories" asp-action="Index" class="nav-link @(ViewData["active_option"].ToString() == "category_list" ? "active": "")">
+                                <a asp-controller="ItemCategories" asp-action="Index" class="nav-link @(ViewData["active_option"]?.ToString() == "category_list" ? "active": "")">
                                     <i class="fa fa-table nav-icon"></i>
                                     <p>Item Category </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a asp-controller="Items" asp-action="Index" class="nav-link @(ViewData["active_option"].ToString() == "item_list" ? "active": "")">
+                                <a asp-controller="Items" asp-action="Index" class="nav-link @(ViewData["active_option"]?.ToString() == "item_list" ? "active": "")">
                                     <i class="fa fa-table nav-icon"></i>
                                     <p>Item</p>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview @(ViewData["open_menu"]?.ToString() == "requisition" ? "menu-open": "") ">
+                    <a href="#" class="nav-link @(ViewData["open_menu"]?.ToString() == "requisition" ? "active": "")">
+                        <i class="fa fa-registered"></i>
+                            <p>
+                                Requisition
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                            <a asp-controller="Requisitions" asp-action="Create" class="nav-link @(ViewData["active_option"]?.ToString() == "requisition_create" ? "active": "")">
+                                    <i class="fa fa-table nav-icon"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                            <a asp-controller="Requisitions" asp-action="Index" class="nav-link @(ViewData["active_option"]?.ToString() == "requisition_list" ? "active": "")">
+                                    <i class="fa fa-table nav-icon"></i>
+                                    <p>List</p>
                                 </a>
                             </li>
 

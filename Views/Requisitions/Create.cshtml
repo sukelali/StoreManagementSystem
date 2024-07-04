@@ -1,0 +1,425 @@
+﻿@model Requisition
+
+@{
+    ViewData["Title"] = "Requisition Create";
+    ViewData["open_menu"] = "requisition";
+    ViewData["active_option"] = "requisition_create";
+    ViewData["page_name"] = "Requisition Create";
+
+    var items = (IEnumerable<Item>)  ViewData["items"];
+}
+
+@section Styles
+{
+
+    <link rel="stylesheet" href="~/lib/summernote/summernote-bs4.css">
+
+    <style>
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .no-padding-input {
+            padding: 0px;
+        }
+
+        /* Firefox */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+
+        .select2-container--default .select2-results > .select2-results__options {
+            max-height: 400px;
+            min-height: 100px;
+            overflow-y: auto;
+        }
+
+    </style>
+
+}
+
+@* <div class="row">
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Number" class="control-label"></label>
+            <input asp-for="Number" class="form-control" />
+            <span asp-validation-for="Number" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="RefNumber" class="control-label"></label>
+            <input asp-for="RefNumber" class="form-control" />
+            <span asp-validation-for="RefNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedOn" class="control-label"></label>
+            <input asp-for="CreatedOn" class="form-control" />
+            <span asp-validation-for="CreatedOn" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedOn" class="control-label"></label>
+            <input asp-for="UpdatedOn" class="form-control" />
+            <span asp-validation-for="UpdatedOn" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+
+    </form>
+</div> *@
+
+<div class="row">
+    <form asp-action="Create">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Number" value="12038012" />
+        <div class="form-row">
+
+            <div class="form-floating col-4">
+                <input type="text" class="form-control form-control-sm" asp-for="RefNumber" />
+                <label asp-for="RefNumber" class="control-label"></label>
+                <span asp-validation-for="RefNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-1">
+                @* @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" }) *@
+                <div class="form-check">
+                    @Html.RadioButtonFor(model => model.Status, "Draft", new { @class = "form-check-input" })
+                    <label class="form-check-label" for="Status_Draft">Draft</label>
+                </div>
+                <div class="form-check">
+                    @Html.RadioButtonFor(model => model.Status, "Approved", new { @class = "form-check-input" })
+                    <label class="form-check-label" for="Status_Approved">Approved</label>
+                </div>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            
+
+@*             <div class="form-floating col-2">
+                <input asp-for="CreatedOn" class="form-control" id="created_on_date" readonly />
+                <label asp-for="CreatedOn" class="control-label">Date</label>
+                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+            </div> *@
+
+        </div>
+        <br />
+        <div class="form-row">
+            <table class="table table-borderless table-sm" id="requisition_table">
+                <thead>
+                    <tr>
+                        <th class="text-center col-1">Sl No.</th>
+                        <th class="text-left col-2"> Line Ref # </th>
+                        <th class="text-left col-5">Item </th>
+                        <th class="col-1"></th>
+                        <th class="col-2">Quantity </th>
+                       
+                        <th class="text-center col-1"><a href="#" id="add_row" class="btn btn-sm btn-info"> <i class="fas fa-plus"></i> </a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="addr0">
+                        <td class="text-center">1</td>
+
+                        <td>
+                            <input class="form-control refNumber no-padding-input form-control-sm" asp-for="RequisitionItems[0].LineRef" required />
+                            <span asp-validation-for="RequisitionItems[0].LineRef" class="text-danger error-ref-number"></span>
+
+                        </td>
+
+                        <td>
+                            <select class="form-control item-select form-control-sm" asp-for="RequisitionItems[0].ItemId" required>
+                                <option value="" selected disabled>
+                                    Select A Item
+                                </option>
+
+                                @foreach (var item in items)
+                                {
+                                    <option value="@item.Id"  data-item-description="@item.Description">
+                                        @Html.Raw(item.Description)
+                                    </option>
+                                }
+
+                            </select>
+
+                            <span asp-validation-for="RequisitionItems[0].ItemId" class="text-danger error-item-id"></span>
+
+                            <textarea asp-for="RequisitionItems[0].ItemDescription" class="form-control item-description form-control-sm mt-1">  </textarea>
+
+                        </td>
+                        <td>
+                            @* <a href="#" id="add_item" class="btn btn-info btn-sm" style="display:inline-block" data-bs-toggle="offcanvas" data-bs-target="#fabric_form" aria-expanded="false" aria-controls="fabric_form"> <i class="fas fa-plus"></i> </a> *@
+                            @* <span class="item-balance float-end"> 0 </span> *@
+                        </td>
+                        <td>
+                            <input type="number" class="form-control quantity no-padding-input form-control-sm" asp-for="RequisitionItems[0].Quantity" required />
+                            <span asp-validation-for="RequisitionItems[0].Quantity" class="text-danger error-quantity"></span>
+
+                        </td>
+                        
+
+                        <td class="text-center">
+                            <a href="#" id="delbtn_0" class="btn btn-danger btn-sm delete_row"><i class="fas fa-minus-circle"></i> </a>
+                        </td>
+                    </tr>
+                    <tr id="addr1"></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-row">
+            <div class="col-10 text-right">
+
+                <strong>Total: <span id="grand_total_quantity"></span> </strong>
+            </div>
+
+        </div>
+        <div class="form-row">
+            <button class="btn btn-info btn-lg col-2 offset-md-5" type="submit">Save</button>
+        </div>
+    </form>
+
+    <br />
+
+</div>
+
+
+
+@section Scripts {
+
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="~/lib/summernote/summernote-bs4.min.js"></script>
+
+    <script>
+        $(function () {
+
+
+            $('textarea.item-description').summernote({
+                toolbar: [],
+            });
+
+            // document.getElementById('created_on_date').valueAsDate = new Date();
+
+            function matcher(params, data) {
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+
+                keywords = (params.term).split(" ");
+
+                for (var i = 0; i < keywords.length; i++) {
+                    if (((data.text).toUpperCase()).indexOf((keywords[i]).toUpperCase()) == -1)
+                        return null;
+                }
+
+                return data;
+            }
+
+           
+            // price set in order item
+            $(document).on('select2:select', 'select.item-select', function (e) {
+
+        
+                let itemDescription = $(this).find(':selected').data('item-description');
+
+                if (itemDescription === undefined) {
+                    itemDescription = "";
+                }
+
+                $(this).parent().find('textarea.item-description').summernote('reset');
+
+                $(this).parent().find('textarea.item-description').summernote('code', itemDescription);
+
+                $(this).parent().find('textarea.item-description').summernote({
+                    toolbar: []
+
+                });
+
+            });
+
+
+            $("select.item-select").select2({
+                placeholder: "Select A Item",
+                allowClear: true,
+                dropdownAutoWidth: true,
+                matcher: matcher
+            });
+
+
+            // remove scroller from number input field for user scroll problem
+            $(document).on("wheel", "input[type=number]", function (e) {
+                e.preventDefault();
+                $(this).blur();
+            });
+
+            // table functionality for Order create
+            var i = 1;
+
+            $(document).on("click", "#add_row", function (e) {
+                e.preventDefault();
+
+                $("select.item-select").select2("destroy");
+
+
+                b = i - 1;
+                $("#addr" + i)
+                    .html($("#addr" + b).html())
+                    .find("td:first-child")
+                    .html(i + 1);
+
+
+                $("#addr" + i).find('div.note-editor').remove();
+
+                $("#requisition_table").append('<tr id="addr' + (i + 1) + '"></tr>');
+
+
+                $("#addr" + i).find('textarea.item-description').summernote({
+                    toolbar: []
+                });
+
+
+                dynamicNameIdSet(i);
+
+                i++;
+
+                $("select.item-select").select2({
+                    placeholder: "Select A Item",
+                    allowClear: true,
+                    dropdownAutoWidth: true,
+                    matcher: matcher
+
+                });
+            });
+
+
+            $(document).on("click", ".delete_row", function (e) {
+                e.preventDefault();
+
+                var position = this.id.split("_")[1];
+
+                $("#addr" + position).remove();
+
+                for (var j = parseInt(position) + 1; j <= i; j++) {
+                    dynamicNameIdSetOnRemove(j);
+                }
+
+                i--;
+                calc();
+
+            });
+
+
+            $("#requisition_table tbody").on("keyup change", function () {
+                calc();
+            });
+
+
+            function dynamicNameIdSet(id) {
+                el = "#addr" + id;
+
+                // item-select
+                $(el + " select.item-select").attr("name", "RequisitionItems[" + id + "].ItemId");
+                $(el + " select.item-select").attr("id", "RequisitionItems_" + id + "__ItemId");
+
+
+                // Style Number
+                $(el + " input.refNumber").attr("name", "RequisitionItems[" + id + "].RefNumber");
+                $(el + " input.refNumber").attr("id", "RequisitionItems_" + id + "__RefNumber");
+
+
+                // Item Description
+                $(el + " textarea.item-description").attr("name", "RequisitionItems[" + id + "].ItemDescription");
+                $(el + " textarea.item-description").attr("id", "RequisitionItems_" + id + "__ItemDescription");
+
+                // Quantity
+                $(el + " input.quantity").attr("name", "RequisitionItems[" + id + "].Quantity");
+                $(el + " input.quantity").attr("id", "RequisitionItems_" + id + "__Quantity");
+
+             
+                // Delete Button
+                $(el + " a.delete_row").attr("id", "delbtn_" + id);
+
+                //errors
+                $(el + " .error-item-id").data("valmsg-for", "RequisitionItems[" + id + "].ItemId");
+                $(el + " .error-ref-number").data("valmsg-for", "RequisitionItems[" + id + "].StyleNumber");
+                $(el + " .error-quantity").data("valmsg-for", "RequisitionItems[" + id + "].Quantity");
+
+
+            }
+
+            function dynamicNameIdSetOnRemove(id) {
+
+                var newId = id - 1;
+
+                el = "#addr" + id;
+
+                $(el + " select.item-select").attr("name", "RequisitionItems[" + newId + "].ItemId");
+                $(el + " select.item-select").attr("id", "RequisitionItems_" + newId + "__ItemId");
+
+
+                // Style Number
+                $(el + " input.refNumber").attr("name", "RequisitionItems[" + newId + "].RefNumber");
+                $(el + " input.refNumber").attr("id", "RequisitionItems_" + newId + "__RefNumber");
+
+
+                // Item Desciption
+                $(el + " textarea.item-description").attr("name", "RequisitionItems[" + newId + "].ItemDescription");
+                $(el + " textarea.item-description").attr("id", "RequisitionItems_" + newId + "__ItemDescription");
+
+                // Quantity
+                $(el + " input.quantity").attr("name", "RequisitionItems[" + newId + "].Quantity");
+                $(el + " input.quantity").attr("id", "RequisitionItems_" + newId + "__Quantity");
+
+                // Delete Button
+                $(el + " a.delete_row").attr("id", "delbtn_" + newId);
+
+                //errors
+                $(el + " .error-item-id").data("valmsg-for", "RequisitionItems[" + newId + "].ItemId");
+                $(el + " .error-ref-number").data("valmsg-for", "RequisitionItems[" + newId + "].StyleNumber");
+                $(el + " .error-quantity").data("valmsg-for", "RequisitionItems[" + newId + "].Quantity");
+
+                $(el).find("td:first-child").html(id);
+
+                $("#addr" + id).attr("id", "addr" + newId);
+
+            }
+
+            function calc() {
+
+                var grandTotal = 0.0;
+
+                $("#requisition_table tbody tr").each(function (i, element) {
+
+                    var html = $(this).html();
+
+                    var quantity = parseFloat($(this).find(".quantity").val());
+
+                    if (isNaN(quantity)) {
+                        quantity = 0.0;
+                    }
+
+                    grandTotal = grandTotal + quantity;
+                });
+
+                $("#grand_total_quantity").text(grandTotal.toFixed(2));
+
+            }
+
+        });
+    </script>
+}
