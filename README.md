@@ -1,6 +1,6 @@
 # ASP.NET Core & EntityFramework Core Based StoreManagementSystem
 
-StoreManagementSystem is a simple Store Management project with Item setup, Requisition, Chalan Module
+StoreManagementSystem is a simple Store Management System with Item setup, Requisition, Challan Module
 using ASP.NET Core and EntityFramework Core.
 
 ## Prerequirements
@@ -11,6 +11,6 @@ using ASP.NET Core and EntityFramework Core.
 
 ## How To Run
 
-* Open solution in Visual Studio 2017
+* Open solution in Visual Studio 2022
 * Set .Web project as Startup Project and build the project.
 * Run the application.
