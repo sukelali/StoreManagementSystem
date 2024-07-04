@@ -338,8 +338,8 @@
 
 
                 // Style Number
-                $(el + " input.refNumber").attr("name", "RequisitionItems[" + id + "].RefNumber");
-                $(el + " input.refNumber").attr("id", "RequisitionItems_" + id + "__RefNumber");
+                $(el + " input.refNumber").attr("name", "RequisitionItems[" + id + "].LineRef");
+                $(el + " input.refNumber").attr("id", "RequisitionItems_" + id + "__LineRef");
 
 
                 // Item Description
@@ -373,8 +373,8 @@
 
 
                 // Style Number
-                $(el + " input.refNumber").attr("name", "RequisitionItems[" + newId + "].RefNumber");
-                $(el + " input.refNumber").attr("id", "RequisitionItems_" + newId + "__RefNumber");
+                $(el + " input.refNumber").attr("name", "RequisitionItems[" + newId + "].LineRef");
+                $(el + " input.refNumber").attr("id", "RequisitionItems_" + newId + "__LineRef");
 
 
                 // Item Desciption
@@ -390,7 +390,7 @@
 
                 //errors
                 $(el + " .error-item-id").data("valmsg-for", "RequisitionItems[" + newId + "].ItemId");
-                $(el + " .error-ref-number").data("valmsg-for", "RequisitionItems[" + newId + "].StyleNumber");
+                $(el + " .error-ref-number").data("valmsg-for", "RequisitionItems[" + newId + "].LineRef");
                 $(el + " .error-quantity").data("valmsg-for", "RequisitionItems[" + newId + "].Quantity");
 
                 $(el).find("td:first-child").html(id);

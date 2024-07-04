@@ -29,7 +29,12 @@ namespace StoreManagementSystem.Controllers
             }
 
             var requisition = await _context.Requisitions
-                .FirstOrDefaultAsync(m => m.Id == id);
+                        .Include( r => r.RequisitionItems)
+                            .ThenInclude( ri => ri.Item)
+                                .ThenInclude(i => i.Unit)
+
+                        .FirstOrDefaultAsync(m => m.Id == id);
+
             if (requisition == null)
             {
                 return NotFound();
@@ -83,11 +88,17 @@ namespace StoreManagementSystem.Controllers
                 return NotFound();
             }
 
-            var requisition = await _context.Requisitions.FindAsync(id);
+            var items = await _context.Items.ToListAsync();
+
+            var requisition = await _context.Requisitions.Include(r => r.RequisitionItems).SingleOrDefaultAsync(r => r.Id == id);
+
             if (requisition == null)
             {
                 return NotFound();
             }
+
+            ViewData["items"] = items;
+
             return View(requisition);
         }
 
@@ -96,7 +107,7 @@ namespace StoreManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Number,Status,RefNumber,Id,CreatedOn,UpdatedOn")] Requisition requisition)
+        public async Task<IActionResult> Edit(long id, [Bind("Number,Status,RefNumber,Id,RequisitionItems")] Requisition requisition)
         {
             if (id != requisition.Id)
             {
@@ -107,7 +118,16 @@ namespace StoreManagementSystem.Controllers
             {
                 try
                 {
+
+                    var oldRequisition = await _context.Requisitions.AsNoTracking().SingleOrDefaultAsync(r => r.Id == requisition.Id);
+
+                    requisition.CreatedOn = oldRequisition.CreatedOn;
+                    requisition.Number = oldRequisition.Number;
+                    requisition.Status = oldRequisition.Status;
+                    requisition.UpdatedOn = DateTime.UtcNow;
+
                     _context.Update(requisition);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

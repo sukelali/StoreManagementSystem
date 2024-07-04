@@ -1,14 +1,17 @@
-﻿@model StoreManagementSystem.Models.Requisition
+﻿@model Requisition
 
 @{
     ViewData["Title"] = "Details";
+
+    ViewData["Title"] = "Requisition Details";
+    ViewData["open_menu"] = "requisition";
+    ViewData["active_option"] = "requisition_list";
+    ViewData["page_name"] = "Requisition Details";
+
+    var sl = 1;
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>Requisition</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Number)
@@ -41,8 +44,52 @@
             @Html.DisplayFor(model => model.UpdatedOn)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+
+    <table class="table table-bordered table-striped table-sm table-hover">
+        <thead>
+            <tr>
+                <th>Sl</th>
+                
+                <th>
+                    Line Ref #    
+                </th>
+                
+                <th>
+                    Item Description
+                </th>
+                <th>
+                    Quantity                
+                </th>
+                <th>
+                    
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody
+            @foreach (var requistionItem in Model.RequisitionItems)
+            {
+                <tr>
+                    <td>@sl</td>
+
+                    <td>
+                        @requistionItem.LineRef
+                    </td>
+
+                    <td>
+                        @Html.Raw(requistionItem.ItemDescription)
+                    </td>
+                    <td>
+                        @requistionItem.Quantity (@requistionItem.Item?.Unit?.Symbol)
+                    </td> 
+                   
+                </tr>
+
+                sl = sl + 1;
+            }
+        </tbody>
+    </table>
+
+
 </div>
