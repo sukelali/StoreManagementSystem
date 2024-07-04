@@ -1,49 +1,204 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StoreManagementSystem</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/StoreManagementSystem.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StoreManagementSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+<html>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - StoreManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"] | Store Management System </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/lib/fontawesome-free/css/all.min.css">
+
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/lib/icheck-bootstrap/icheck-bootstrap.min.css">
+
+    <!-- Bootstrap 5.1 -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/lib/sweetalert2/sweetalert2.min.css">
+
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/lib/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/lib/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/lib/daterangepicker/daterangepicker.css">
+
+
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
+    <style>
+
+        .card-info:not(.card-outline) > .card-header {
+            background-color: #001F3F;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #001F3F;
+            border-color: #001F3F;
+            box-shadow: none;
+        }
+
+        .btn-info:hover {
+            color: #fff;
+            background-color: #003b70;
+            border-color: #003b70;
+            box-shadow: none;
+        }
+
+    </style>
+
+    @RenderSection("Styles", required: false)
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed accent-navy">
+    <div class="wrapper">
+        <!-- Navbar -->
+        @await Html.PartialAsync("~/Views/Partial/_Header.cshtml")
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        @await Html.PartialAsync("~/Views/Partial/_Sidebar.cshtml")
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            @await Html.PartialAsync("~/Views/Partial/_Breadcum.cshtml")
+
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+
+
+                    @RenderBody()
+                    <!-- /.row (main row) -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        <!-- /.content-wrapper -->
+        @await Html.PartialAsync("~/Views/Partial/_Footer.cshtml")
+
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="/lib/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap 5 -->
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- daterangepicker -->
+    <script src="/lib/moment/moment.min.js"></script>
+
+    <script src="/lib/daterangepicker/daterangepicker.js"></script>
+
+
+    <!-- overlayScrollbars -->
+    <script src="/lib/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="/js/adminlte.js"></script>
+
+    <!-- Select2 -->
+    <script src="/lib/select2/js/select2.full.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="/lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="/lib/sweetalert2/sweetalert2.min.js"></script>
+
+    <!-- Signalrjs -->
+    <script src="~/js/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
+
+    <!-- Jquery Validation -->
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+
+    <script>
+
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+
+
+
+
+        $(function () {
+
+            var isCollapsed = getCookie("sidebarCollapsed");
+
+            if (isCollapsed === "true") {
+                $('body').addClass('sidebar-collapse');
+            } else {
+                $('body').removeClass('sidebar-collapse');
+            }
+
+            $('[data-widget="pushmenu"]').on('click', function () {
+
+                var isCollapsed = $('body').hasClass('sidebar-collapse');
+
+                setCookie("sidebarCollapsed", !isCollapsed, 1); // Save for 7 days
+
+
+            });
+
+
+
+            $(document).on("click", '#logout-button', function (event) {
+                event.preventDefault();
+                $("#logout-form").submit();
+            });
+
+        });
+
+    </script>
+
+
+    @RenderSection("Scripts", required: false)
+
 </body>
+
 </html>

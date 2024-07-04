@@ -1,0 +1,69 @@
+
+
+<aside class="main-sidebar elevation-4 sidebar-light-navy">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+        <span class="brand-text text-sm">Store Name</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a asp-area="Organization" asp-controller="UserProfile" asp-action="Index" class="d-block"> </a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-child-indent nav-collapse-hide-child nav-flat" data-widget="treeview" role="menu"
+                data-accordion="false">
+
+
+                <li class="nav-item has-treeview @(ViewData["open_menu"].ToString() == "item_setup" ? "menu-open": "") ">
+                    <a href="#" class="nav-link @(ViewData["open_menu"].ToString() == "item_setup" ? "active": "")">
+                            <i class="fa fa-cog"></i>
+                            <p>
+                                Item Setup
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a asp-controller="Units" asp-action="Index" class="nav-link @(ViewData["active_option"].ToString() == "unit_list" ? "active": "")">
+                                <i class="fa fa-table nav-icon"></i>
+                                    <p>Unit</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-area="Merchandising" asp-controller="Order" asp-action="CreateTrimOrder" class="nav-link @(ViewData["active_option"].ToString() == "trims_booking" ? "active": "")">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>T&A Booking</p>
+                                </a>
+                            </li>
+
+                            
+                            <li class="nav-item">
+                                <a asp-area="Merchandising" asp-controller="Order" asp-action="Index" class="nav-link @(ViewData["active_option"].ToString() == "order_list" ? "active": "") ">
+                                    <i class="fa fa-table nav-icon"></i>
+                                    <p>Booking List </p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                
+
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
