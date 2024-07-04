@@ -24,5 +24,6 @@ namespace StoreManagementSystem.Data
         }
 
         public DbSet<Unit> Units { get; set; } = default!;
+        public DbSet<ItemCategory> ItemCategories { get; set; } = default!;
     }
 }
