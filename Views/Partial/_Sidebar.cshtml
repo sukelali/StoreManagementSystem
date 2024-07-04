@@ -48,6 +48,13 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+                                <a asp-controller="Items" asp-action="Index" class="nav-link @(ViewData["active_option"].ToString() == "item_list" ? "active": "")">
+                                    <i class="fa fa-table nav-icon"></i>
+                                    <p>Item</p>
+                                </a>
+                            </li>
+
 
                         </ul>
                     </li>

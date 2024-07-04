@@ -1,0 +1,70 @@
+﻿@model Item
+
+@{
+    ViewData["Title"] = "Item  Create";
+    ViewData["open_menu"] = "item_setup";
+    ViewData["active_option"] = "item_list";
+    ViewData["page_name"] = "Item Create";
+}
+
+@section Styles {
+
+    <link rel="stylesheet" href="~/lib/summernote/summernote-bs4.css">
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="GroupCode" value="000001" />
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitId" class="control-label"></label>
+                <select asp-for="UnitId" class ="form-control" asp-items="ViewBag.UnitId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control item-description form-control-sm mt-1"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Ref" class="control-label"></label>
+                <input asp-for="Ref" class="form-control" />
+                <span asp-validation-for="Ref" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script src="~/lib/summernote/summernote-bs4.min.js"></script>
+
+    <script>
+
+        $('textarea.item-description').summernote({
+            toolbar: [
+                // // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['height', ['height']]
+            ]
+
+        });
+
+        $('textarea.item-description').summernote('fontSize', 14);
+
+
+    </script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
