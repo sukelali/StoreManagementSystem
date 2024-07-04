@@ -79,9 +79,13 @@ namespace StoreManagementSystem.Controllers
             {
                 try
                 {
+                    var oldUnit = await _context.Units.AsNoTracking().SingleOrDefaultAsync(u => u.Id == unit.Id);
 
                     unit.UpdatedOn = DateTime.UtcNow;
+                    unit.CreatedOn = oldUnit.CreatedOn;
+
                     _context.Update(unit);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
