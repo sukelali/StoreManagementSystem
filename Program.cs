@@ -1,4 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using StoreManagementSystem.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<StoreManagementSystemContext>(options =>
+
+    options.UseNpgsql(builder.Configuration.GetConnectionString("StoreManagementSystemContext") ?? throw new InvalidOperationException("Connection string 'StoreManagementSystemContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
