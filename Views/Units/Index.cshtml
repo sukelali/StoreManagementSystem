@@ -1,17 +1,20 @@
 ﻿@model IEnumerable<Unit>
-
 @{
-    ViewData["Title"] = "Index";
+
+    ViewData["Title"] = "Unit List";
+    ViewData["open_menu"] = "item_setup";
+    ViewData["active_option"] = "unit_list";
+    ViewData["page_name"] = "Unit List";
+
+    int sl = 1;
 }
-
-<h1>Index</h1>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-info">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-striped table-sm table-hover">
     <thead>
         <tr>
+            <th>Sl </th>
             <th>
                 @Html.DisplayNameFor(model => model.Symbol)
             </th>
@@ -28,26 +31,29 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Symbol)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedOn)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model) {
+            <tr>
+                <td> @sl </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Symbol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedOn)
+                </td>
+                <td nowrap>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+
+            sl = sl + 1;
+        }
     </tbody>
 </table>

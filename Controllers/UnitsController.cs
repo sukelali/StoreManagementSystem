@@ -20,23 +20,6 @@ namespace StoreManagementSystem.Controllers
             return View(await _context.Units.ToListAsync());
         }
 
-        // GET: Units/Details/5
-        public async Task<IActionResult> Details(long? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var unit = await _context.Units
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (unit == null)
-            {
-                return NotFound();
-            }
-
-            return View(unit);
-        }
 
         // GET: Units/Create
         public IActionResult Create()
@@ -49,10 +32,13 @@ namespace StoreManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Symbol,Name,Id,CreatedOn,UpdatedOn")] Unit unit)
+        public async Task<IActionResult> Create([Bind("Symbol,Name")] Unit unit)
         {
             if (ModelState.IsValid)
             {
+                unit.CreatedOn = DateTime.UtcNow;
+                unit.UpdatedOn = DateTime.UtcNow;
+
                 _context.Add(unit);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -69,6 +55,7 @@ namespace StoreManagementSystem.Controllers
             }
 
             var unit = await _context.Units.FindAsync(id);
+
             if (unit == null)
             {
                 return NotFound();
@@ -81,7 +68,7 @@ namespace StoreManagementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Symbol,Name,Id,CreatedOn,UpdatedOn")] Unit unit)
+        public async Task<IActionResult> Edit(long id, [Bind("Symbol,Name,Id")] Unit unit)
         {
             if (id != unit.Id)
             {
@@ -92,6 +79,8 @@ namespace StoreManagementSystem.Controllers
             {
                 try
                 {
+
+                    unit.UpdatedOn = DateTime.UtcNow;
                     _context.Update(unit);
                     await _context.SaveChangesAsync();
                 }
@@ -121,6 +110,7 @@ namespace StoreManagementSystem.Controllers
 
             var unit = await _context.Units
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (unit == null)
             {
                 return NotFound();
@@ -141,6 +131,7 @@ namespace StoreManagementSystem.Controllers
             }
 
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -148,5 +139,6 @@ namespace StoreManagementSystem.Controllers
         {
             return _context.Units.Any(e => e.Id == id);
         }
+
     }
 }
