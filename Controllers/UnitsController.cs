@@ -22,7 +22,7 @@ namespace StoreManagementSystem.Controllers
         // GET: Units
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Unit.ToListAsync());
+            return View(await _context.Units.ToListAsync());
         }
 
         // GET: Units/Details/5
@@ -33,7 +33,7 @@ namespace StoreManagementSystem.Controllers
                 return NotFound();
             }
 
-            var unit = await _context.Unit
+            var unit = await _context.Units
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (unit == null)
             {
@@ -73,7 +73,7 @@ namespace StoreManagementSystem.Controllers
                 return NotFound();
             }
 
-            var unit = await _context.Unit.FindAsync(id);
+            var unit = await _context.Units.FindAsync(id);
             if (unit == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace StoreManagementSystem.Controllers
                 return NotFound();
             }
 
-            var unit = await _context.Unit
+            var unit = await _context.Units
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (unit == null)
             {
@@ -139,10 +139,10 @@ namespace StoreManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var unit = await _context.Unit.FindAsync(id);
+            var unit = await _context.Units.FindAsync(id);
             if (unit != null)
             {
-                _context.Unit.Remove(unit);
+                _context.Units.Remove(unit);
             }
 
             await _context.SaveChangesAsync();
@@ -151,7 +151,7 @@ namespace StoreManagementSystem.Controllers
 
         private bool UnitExists(long id)
         {
-            return _context.Unit.Any(e => e.Id == id);
+            return _context.Units.Any(e => e.Id == id);
         }
     }
 }

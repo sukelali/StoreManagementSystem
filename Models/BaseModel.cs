@@ -1,4 +1,6 @@
-﻿namespace StoreManagementSystem.Models
+﻿
+
+namespace StoreManagementSystem.Models
 {
     public class BaseModel
     {
